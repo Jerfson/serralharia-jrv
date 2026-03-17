@@ -27,7 +27,7 @@ function AppContent() {
     setEditingQuote(null);
   };
 
-  const { loading } = useAppContext();
+  const { loading, error } = useAppContext();
 
   if (loading) {
     return (
@@ -35,6 +35,26 @@ function AppContent() {
         <div className="flex flex-col items-center">
           <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
           <p className="text-gray-600 font-medium">Carregando dados...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+          <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+            ⚠️
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Erro de Conexão</h2>
+          <p className="text-gray-500 text-sm mb-6">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors"
+          >
+            Tentar novamente
+          </button>
         </div>
       </div>
     );
